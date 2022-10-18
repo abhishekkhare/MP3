@@ -48,8 +48,14 @@ class Corpus(object):
         # #############################
         # your code here
         # #############################
-        
-        pass    # REMOVE THIS
+        file = open(self.documents_path, 'r')
+        lines = file.readlines()
+        self.number_of_documents = len(lines)
+        for line in lines:
+            tokens = line.split()
+            tokens = tokens[1:]
+            self.documents.append(tokens)
+        # pass    # REMOVE THIS
 
     def build_vocabulary(self):
         """
