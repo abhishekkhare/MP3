@@ -67,8 +67,12 @@ class Corpus(object):
         # #############################
         # your code here
         # #############################
-        
-        pass    # REMOVE THIS
+        words = set()
+        for w in self.documents:
+            words.update(w)
+        self.vocabulary_size = len(words)
+        self.vocabulary = list(words)
+        # pass    # REMOVE THIS
 
     def build_term_doc_matrix(self):
         """
