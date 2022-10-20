@@ -84,8 +84,12 @@ class Corpus(object):
         # ############################
         # your code here
         # ############################
-        
-        pass    # REMOVE THIS
+        self.term_doc_matrix = np.zeros(shape=(self.number_of_documents, self.vocabulary_size))
+        colCount = rowCount = 0
+        for i in range(self.number_of_documents):
+            for j in range(self.vocabulary_size):
+                self.term_doc_matrix[i][j] = self.documents[i].count(self.vocabulary[j])
+        #pass    # REMOVE THIS
 
 
     def initialize_randomly(self, number_of_topics):
