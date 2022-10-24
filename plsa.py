@@ -186,6 +186,9 @@ class Corpus(object):
         Append the calculated log-likelihood to self.likelihoods
 
         """
+        sum = np.dot(self.document_topic_prob ,  self.topic_word_prob)
+        likelihood = self.term_doc_matrix * np.log(sum)
+        self.likelihoods.append(np.sum(likelihood))
         # ############################
         # your code here
         # ############################
@@ -215,7 +218,16 @@ class Corpus(object):
 
         for iteration in range(max_iter):
             print("Iteration #" + str(iteration + 1) + "...")
-
+            self.calculate_likelihood(number_of_topics)
+            if iteration > 1 :
+                if self.likelihoods[iteration] - self.likelihoods[iteration -1] > epsilon:
+                    self.expectation_step()
+                    self.maximization_step(number_of_topics)
+                else:
+                    break
+            else:
+                self.expectation_step()
+                self.maximization_step(number_of_topics)
             # ############################
             # your code here
             # ############################
